@@ -6,7 +6,7 @@
 /*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 22:56:43 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/26 21:41:23 by tmerli           ###   ########.fr       */
+/*   Updated: 2017/12/29 23:13:41 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 int ft_get_param(t_format *param,const char *p)
 {
 	int i;
+	int ret;
 
+	ret = 0;
 	i = 0;
 	i += ft_get_flags(param, &p[i]);
 	param->min = ft_atoi(&p[i]);
@@ -25,7 +27,7 @@ int ft_get_param(t_format *param,const char *p)
 	if (p[i] == '.')
 	{
 		i++;
-		param->precision = ft_atoi(&p[i]);
+		param->precision = (ret = ft_atoi(&p[i])) ? ret : -1;
 		while (ft_isdigit(p[i]))
 			i++;
 	}
@@ -56,6 +58,9 @@ void	check_param(t_format param)
 	printf("type : %c\n", param.type);
 }
 */
+
+#include <stdio.h>
+
 int		ft_printf(const char *format, ...)
 {
 	va_list ap;
@@ -75,21 +80,13 @@ int		ft_printf(const char *format, ...)
 			i++;
 			if ((ret = ft_get_param(&param, &format[i])))
 				printed += ft_put(ap, param);
-//				;
-//				check_param(param);
 			i += ret;
 		}
-		ft_putchar(format[i++]);
-		printed++;
-	}
+		(format[i]) ? ft_putchar(format[i]) : i;
+		(format[i]) ? printed++: printed;
+		(format[i]) ? i++ : i;
+ 	}
 	va_end(ap);
-	return (0);
+	return (printed);
 }
 
-int main(int argc, const char *argv[])
-{
-	char *s = "test bla %0+- 62hd awffa %+0d SF";
-	printf("%s\n", s);
-	ft_printf(s, 3);
-	return 0;
-}

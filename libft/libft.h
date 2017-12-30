@@ -6,7 +6,7 @@
 /*   By: tmerli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 18:46:45 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/27 17:10:23 by tmerli           ###   ########.fr       */
+/*   Updated: 2017/12/27 22:56:22 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ int				ft_isalpha(int c);
 int				ft_isalnum(int c);
 void			ft_bzero(void *s, size_t n);
 int				ft_atoi(const char *str);
+char			*ft_itoa_base(unsigned long long n, int base);
+void			ft_toupper_s(char **s);
 
 #endif
