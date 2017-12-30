@@ -6,7 +6,7 @@
 /*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 20:37:57 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/30 13:01:59 by tmerli           ###   ########.fr       */
+/*   Updated: 2017/12/30 14:21:30 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_put(va_list ap, t_format p)
 	long long num;
 
 	disp = NULL;
-	num = 0;
+	num = 1;
 	if (p.type == 'd' || p.type == 'D' || p.type == 'x' || p.type == 'X'
 			|| p.type == 'o' || p.type == 'O' || p.type == 'u' || p.type == 'U'
 			|| p.type == 'i' || p.type == 'p')
@@ -36,5 +36,11 @@ int		ft_put(va_list ap, t_format p)
 			disp = ft_get_ll(p, num);
 		num = ft_flags(p, disp);
 	}
+	else if (ft_tolower(p.type) == 's')
+		return(ft_putstr(va_arg(ap, char*)));
+	else if (ft_tolower(p.type) == 'c')
+		ft_putchar((char)va_arg(ap, int));
+	else if (p.type == '%')
+		ft_putchar('%');
 	return (num);
 }

@@ -6,7 +6,7 @@
 /*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:46:35 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/29 23:57:11 by tmerli           ###   ########.fr       */
+/*   Updated: 2017/12/30 16:01:43 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ int		put_space(t_format p, int len, char c, char *disp)
 
 	printed = 0;
 	len = (p.precision > len) ? p.precision : len;
+	if (p.precision == len && disp[0] == '-')
+		len++;
+	if ((p.flags[2] || p.flags[1]) && (ft_tolower(p.type) == 'd' ||
+				p.type == 'i') && disp[0] != '-')
+		len++;
 	if (p.type == 'o' && p.flags[4] && disp[0] != '0')
 		len++;
-	if ((ft_tolower(p.type) == 'x' ||p.type == 'p')
+	if ((ft_tolower(p.type) == 'x' || p.type == 'p')
 			&& p.flags[4] && disp[0] != '0')
 		len += 2;
 	while (len < p.min)
@@ -63,11 +68,13 @@ int		put_sign(t_format p, char *disp)
 	return (printed);
 }
 
-int		put_precision(t_format p, int len)
+int		put_precision(t_format p, int len, char *disp)
 {
 	int printed;
 	
 	printed = 0;
+	if (disp[0] == '-')
+		len--;
 	while (len < p.precision)
 	{
 		write(1, "0", 1);
@@ -84,17 +91,18 @@ int		ft_flags(t_format p, char *disp)
 
 	len = ft_strlen(disp);
 	printed = 0;
+	(disp[0] == '0' && p.precision == -1) ? len-- : len;
 	if (!p.flags[0] && (!p.flags[3] || p.precision))
 		printed += put_space(p, len, ' ', disp);
 	printed += put_sign(p, disp);
 	if (disp[0] == '-')
-		len--;
+		printed--;
 	if (p.flags[4])
 		printed += put_0x(p, disp);
 	if (!p.flags[0] && p.flags[3] && !p.precision)
 		printed += put_space(p, len, '0', disp);
 	if (p.precision)
-		printed += put_precision(p, len);
+		printed += put_precision(p, len, disp);
 	if (!(p.precision == -1 && disp[0] == '0'))
 	{
 		(disp[0] == '-') ? ft_putstr(&disp[1]) : ft_putstr(disp);
