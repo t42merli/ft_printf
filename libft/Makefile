@@ -6,13 +6,12 @@
 #    By: tmerli <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 16:38:31 by tmerli            #+#    #+#              #
-#    Updated: 2017/12/27 22:59:22 by tmerli           ###   ########.fr        #
+#    Updated: 2018/01/09 18:33:45 by tmerli           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-
 SRC = ft_itoa_base.c\
+	  ft_putnstr.c\
 	  ft_toupper_s.c\
 	  ft_atoi.c\
 	  ft_islower.c\
@@ -79,17 +78,14 @@ FLAGS = -Wall -Wextra -Werror
 
 OBJ = $(SRC:.c=.o)
 
-all : $(NAME)
+all : $(OBJ)
 
-$(NAME) : $(SRC)
+$(OBJ) : $(SRC)
 	gcc -c $(FLAGS) $(SRC)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
 
 clean :
 	rm -f $(OBJ)
 
-fclean : clean
-	rm -f $(NAME)
 
-re : fclean all
+
+re : clean all

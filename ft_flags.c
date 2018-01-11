@@ -6,7 +6,7 @@
 /*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 13:46:35 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/30 16:01:43 by tmerli           ###   ########.fr       */
+/*   Updated: 2018/01/09 17:42:11 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int		put_0x(t_format p, char *disp)
 	int printed;
 
 	printed = 0;
-	if (p.type == 'p' || ( p.type == 'x' && disp[0] != '0'))
+	if (p.type == 'p' || (p.type == 'x' && disp[0] != '0'))
 		printed = write(1, "0x", 2);
 	if (p.type == 'X' && disp[0] != '0')
 		printed = write(1, "0X", 2);
-	if (ft_tolower(p.type) == 'o')
+	if (ft_tolower(p.type) == 'o' && !(disp[0] == '0' && p.precision != -1))
 		printed = write(1, "0", 1);
 	return (printed);
 }
@@ -39,8 +39,8 @@ int		put_space(t_format p, int len, char c, char *disp)
 		len++;
 	if (p.type == 'o' && p.flags[4] && disp[0] != '0')
 		len++;
-	if ((ft_tolower(p.type) == 'x' || p.type == 'p')
-			&& p.flags[4] && disp[0] != '0')
+	if ((ft_tolower(p.type) == 'x'
+			&& p.flags[4] && disp[0] != '0') || p.type == 'p')
 		len += 2;
 	while (len < p.min)
 	{
@@ -71,10 +71,12 @@ int		put_sign(t_format p, char *disp)
 int		put_precision(t_format p, int len, char *disp)
 {
 	int printed;
-	
+
 	printed = 0;
 	if (disp[0] == '-')
 		len--;
+	if (ft_tolower(p.type) == 'o' && p.flags[4])
+		len++;
 	while (len < p.precision)
 	{
 		write(1, "0", 1);
@@ -97,7 +99,7 @@ int		ft_flags(t_format p, char *disp)
 	printed += put_sign(p, disp);
 	if (disp[0] == '-')
 		printed--;
-	if (p.flags[4])
+	if (p.flags[4] || p.type == 'p')
 		printed += put_0x(p, disp);
 	if (!p.flags[0] && p.flags[3] && !p.precision)
 		printed += put_space(p, len, '0', disp);

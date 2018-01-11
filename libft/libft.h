@@ -6,7 +6,7 @@
 /*   By: tmerli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 18:46:45 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/30 14:18:07 by tmerli           ###   ########.fr       */
+/*   Updated: 2018/01/09 17:24:30 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+int				ft_putnstr(char *str, int size);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strtrim(char const *s);
@@ -52,7 +53,7 @@ void			ft_strclr(char *s);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strcat(char *s1, const char *s2);
 void			ft_putstr_fd(char const *str, int fd);
-int			ft_putstr(char const *str);
+int				ft_putstr(char const *str);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putnbr(int n);
 void			ft_putendl_fd(char const *s, int fd);

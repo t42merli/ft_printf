@@ -6,7 +6,7 @@
 /*   By: tmerli <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:43:35 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/29 21:08:46 by tmerli           ###   ########.fr       */
+/*   Updated: 2018/01/09 17:24:57 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	ft_count(unsigned long long n)
 
 char		*ft_itoa(long long n)
 {
-	char		*str;
-	int			i;
-	int			j;
+	char				*str;
+	int					i;
+	int					j;
 	unsigned long long	nb;
 
 	nb = n;
 	i = 0;
-	if (!(str = ft_strnew(i)))
+	if (!(str = ft_strnew(ft_count(nb))))
 		return (NULL);
 	j = 0;
 	if (n < 0)

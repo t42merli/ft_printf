@@ -6,7 +6,7 @@
 /*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 18:21:54 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/29 17:03:38 by tmerli           ###   ########.fr       */
+/*   Updated: 2018/01/08 19:00:08 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char		*ft_itoa_base(unsigned long long n, int base)
 	}
 	bs = "0123456789abcdef";
 	tmp = ft_count(n, base);
-	if (!(nbr = ft_strnew(tmp)))
+	if (!(nbr = ft_strnew(tmp + 1)))
 		return (NULL);
 	i = tmp;
 	while (i >= 0)
@@ -50,6 +50,5 @@ char		*ft_itoa_base(unsigned long long n, int base)
 		n = n / base;
 		i--;
 	}
-//	nbr[tmp + 1] = '\0';
 	return (nbr);
 }

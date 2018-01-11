@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmerli <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 14:02:04 by tmerli            #+#    #+#             */
-/*   Updated: 2018/01/08 16:52:45 by tmerli           ###   ########.fr       */
+/*   Created: 2018/01/09 16:44:22 by tmerli            #+#    #+#             */
+/*   Updated: 2018/01/09 16:54:50 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_putstr(char const *str)
+int		ft_putnstr(char *str, int size)
 {
-	unsigned int i;
-
-	i = 0;
-	if (str)
-	{
-		i = ft_strlen(str);
-		write(1, str, i);
-	}
-	return (i);
+	if (size <= 0)
+		return (0);
+	if (size > (int)ft_strlen(str))
+		size = (int)ft_strlen(str);
+	return (write(1, str, size));
 }

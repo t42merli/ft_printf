@@ -6,7 +6,7 @@
 /*   By: tmerli <tmerli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 13:50:07 by tmerli            #+#    #+#             */
-/*   Updated: 2017/12/29 23:11:27 by tmerli           ###   ########.fr       */
+/*   Updated: 2018/01/09 17:27:33 by tmerli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int		ft_get_length(t_format *param, const char *p)
 
 	i = 0;
 	param->length = 0;
-	while (p[i] && (p[i] == 'l' || p[i] == 'h' || p[i] == 'j' || p[i] ==  'z')
+	while (p[i] && (p[i] == 'l' || p[i] == 'h' || p[i] == 'j' || p[i] == 'z')
 			&& i < 2 && !(param->length == 'z' || param->length == 'j'))
 	{
 		if (!i)
 			param->length = p[i];
-		if (i && (param->length == 'l' ||  param->length == 'h'))
+		if (i && (param->length == 'l' || param->length == 'h'))
 			param->length = ft_toupper(p[i]);
 		else if (i)
 			return (i);
@@ -61,8 +61,8 @@ int		ft_get_length(t_format *param, const char *p)
 int		is_type(char c)
 {
 	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i'
-			 || c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
-			 || c == 'X' || c == 'c' || c == 'C')
+			|| c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
+			|| c == 'X' || c == 'c' || c == 'C' || c == '%')
 		return (1);
 	return (0);
 }
